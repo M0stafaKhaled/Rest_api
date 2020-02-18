@@ -1,6 +1,5 @@
 <?php 
 class DataBase {
-
 //DB parameter 
   private $host = 'localhost';
   private $userName = 'root';
@@ -21,7 +20,6 @@ try {
 echo 'Connection Error:' . $e->getMessage();
 
   }
-  
   
   return $this->conn; 
 }
