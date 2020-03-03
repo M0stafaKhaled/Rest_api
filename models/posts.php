@@ -35,6 +35,7 @@ public function read_single()
   FROM ' . $this->table . ' p
   LEFT JOIN
     categories c ON p.category_id = c.id
+    WHERE
       p.id = ? 
       LIMIT 0,1 
 
