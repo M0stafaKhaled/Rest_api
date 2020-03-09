@@ -36,8 +36,8 @@ public function read_single()
   LEFT JOIN
     categories c ON p.category_id = c.id
     WHERE
-      p.id = ? 
-      LIMIT 0,1 
+      p.id = ?
+      LIMIT 0,1                                                                      
 
     ';
     $stmt =  $this->conn->prepare($query);
@@ -53,6 +53,34 @@ public function read_single()
 
 
 
+}
+
+public function create(){
+
+
+  $query =  'INSERT INTO' . $this->table . 'SET
+      title = :title ,
+      body=:body,
+      author=:author,
+      category_id=:category_id,
+  ';
+
+  $stmt = $this->conn->prepare($query);
+  $this->title = htmlspecialchars(strip_tags($this->title));
+  $this->title = htmlspecialchars(strip_tags($this->body));
+  $this->title = htmlspecialchars(strip_tags($this->author));
+  $this->title = htmlspecialchars(strip_tags($this->category_id));
+  $stmt->bindParam(':title',$this->title);
+  $stmt->bindParam(':author',$this->author);
+  $stmt->bindParam(':body',$this->body);
+  $stmt->bindParam(':category-id',$this->category_id);
+  if($stmt->execute()){
+
+    return true;
+  }
+
+  printf("Error:%S.\n",$stmt->error);
+  return false;
 }
 
 

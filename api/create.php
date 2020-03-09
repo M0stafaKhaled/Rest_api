@@ -3,7 +3,8 @@
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
   header('Access-Control-Allow-Methods:POST');
-  header('Access-Control-Allow-Headers:Access-control-Allow-Headers');
+  header('Access-Control-Allow-Headers:Access-control-Allow-Headers , content-type ,
+   Access-Control-Allow-Methods,Authorathization,X-requested-with' );
 
   include_once '../../config/Database.php';
   include_once '../../models/Posts.php';
@@ -13,3 +14,25 @@
   $db = $database->connect();
 
   $post = new Posts($db);
+$data = json_decode(file_get_contents("php://input"));
+$post->title = $data->title; 
+
+$post->author = $data->author; 
+$post->body = $data->body; 
+$post->gategory_id = $data->gategory_id; 
+
+
+if($post->create()){
+
+
+echo json_encode(array('message' => 'post created'));
+
+
+
+}
+
+else {
+
+
+  echo json_encode(array('message'=>'post not created'));
+}
