@@ -14,10 +14,10 @@
 
   $post = new Posts($db);
 $data = json_decode(file_get_contents("php://input"));
-$post->title = $data->title; 
+$post->title = $data->title;
 $post->author = $data->author; 
 $post->body = $data->body; 
-$post->gategory_id = $data->gategory_id; 
+$post->category_id = $data->category_id; 
 
 
 if($post->create()){
